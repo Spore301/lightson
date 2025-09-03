@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light?</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎚️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            background-color: rgb(12, 12, 12); /* this will cover the whole viewport */
+            transition: background-color 0.6s ease-in-out; /* smooth background change */
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+            
+        }
+        .board{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+            height: fit-content;
+            padding: 20px;
+            border: 1px solid white;
+            border-radius: 20px;
+            cursor: pointer;
+            background-color: transparent;
+        }
+        .switch{
+            width: 60px;
+            height: 60px;
+            border-radius: 100%;
+            background-color: rgb(247, 106, 106);
+            border: 1px solid white;
+            transition: background-color 0.4s ease-in-out, border 0.4s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        p{
+            color: white;
+            font-family: outfit, sans-serif;
+            font-weight: 100;
+            font-size: 15px;
+            text-align: center; 
+            line-height: 22px;
+        }
+
+        .onoff{
+            color: white;
+            font-family: outfit, sans-serif;
+            font-weight: 200;
+            font-size: 12px;
+            user-select: none;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .switch{
+                width: 40px;
+                height: 40px;
+            }
+            p{
+                font-size: 12px;
+                line-height: 18px;
+            }
+
+            .onoff{
+                font-size: 10px;
+            }
+
+            
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p id="head"style="color: white; font-family: outfit, sans-serif; font-weight: 200; font-size: 20px;">Feeling Lost?</p>
+        <div class = "board" id="board">
+            <div class = "switch" id = "switch"><p class="onoff" id="onoff">OFF</p></div>
+        </div>
+        <p id="text">If you are feeling LOST, <br/>Just remember to turn on the LIGHT!</p>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
