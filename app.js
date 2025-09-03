@@ -6,16 +6,45 @@ const myhead = document.querySelector('#head');
 const defaultText = myText.innerText;
 const defaultonoff = myonoff.innerText;
 let isLightOn = false;
+let isAnimating = false;
 
-myBoard.addEventListener('click', () => {
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function typeWriter(element, newText) {
+    isAnimating = true;
+
+    let oldText = element.innerText;
+
+    // Delete old text
+    for (let i = oldText.length; i >= 0; i--) {
+        element.innerText = oldText.substring(0, i);
+        await sleep(10); // delay between deletions
+    }
+
+    // Type new text
+    for (let j = 0; j <= newText.length; j++) {
+        element.innerText = newText.substring(0, j);
+        await sleep(30); // delay between typing
+    }
+
+    isAnimating = false;
+}
+
+myBoard.addEventListener('click', async () => {
+    if (isAnimating) return; // ignore clicks mid-animation
+
     if (!document.body.classList.contains('light-on')) {
         document.body.classList.add('light-on');
-        typeWriter(myText, "Hope you can see the light now!");
+        await typeWriter(myText, "Hope you can see the light now!");
     } else {
         document.body.classList.remove('light-on');
-        typeWriter(myText, defaultText);
+        await typeWriter(myText, defaultText);
     }
 });
+
+
 myBoard.addEventListener('click', () => {
     if (isLightOn === false){
         myBoard.style.border = '1px solid rgb(12, 12, 12)';
@@ -46,33 +75,5 @@ myBoard.addEventListener('click', () => {
     }
 });
 
-function typeWriter(element, newText, callback) {
-    let oldText = element.innerText;
-    let i = oldText.length;
 
-    // Delete old text
-    function deleteChar() {
-        if (i >= 0) {
-            element.innerText = oldText.substring(0, i);
-            i--;
-            setTimeout(deleteChar, 10); // speed of deleting
-        } else {
-            typeChar();
-        }
-    }
-
-    let j = 0;
-    // Type new text
-    function typeChar() {
-        if (j <= newText.length) {
-            element.innerText = newText.substring(0, j);
-            j++;
-            setTimeout(typeChar, 30); // speed of typing
-        } else if (callback) {
-            callback();
-        }
-    }
-
-    deleteChar();
-}
 
